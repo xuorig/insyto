@@ -2,13 +2,14 @@ import 'babel/polyfill';
 
 class App extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div>
-        <h1>Widget list</h1>
+        <div>{this.props.course.name} - {this.props.course.description}</div>
         <ul>
-          {this.props.viewer.widgets.edges.map(edge =>
-            <li>{edge.node.name} (ID: {edge.node.id})</li>
-          )}
+        {this.props.course.lectures.edges.map(edge =>
+          <li>{edge.node.name} ({edge.node.description})</li>
+        )}
         </ul>
       </div>
     );
@@ -17,16 +18,18 @@ class App extends React.Component {
 
 export default Relay.createContainer(App, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        widgets(first: 10) {
+    course: () => Relay.QL`
+      fragment on Course {
+        name
+        description
+        lectures(first: 10) {
           edges {
             node {
-              id,
-              name,
-            },
-          },
-        },
+              name
+              description
+            }
+          }
+        }
       }
     `,
   },
