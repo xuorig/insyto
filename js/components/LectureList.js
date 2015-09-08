@@ -1,21 +1,19 @@
 import 'babel/polyfill';
-import Course from './Course';
+import LectureListItem from './LectureListItem';
 
-class App extends React.Component {
+class LectureList extends React.Component {
   render() {
-    console.log(this.props);
+    var lectures = this.props.course.lectures.edges;
     return (
-      <Course/>
+      <ul>{lectures.map(lectureEdge => <LectureListItem lecture={lectureEdge.node}/>)}</ul>
     );
   }
 }
 
-export default Relay.createContainer(App, {
+export default Relay.createContainer(LectureList, {
   fragments: {
     course: () => Relay.QL`
       fragment on Course {
-        name
-        description
         lectures(first: 10) {
           edges {
             node {
