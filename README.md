@@ -1,6 +1,6 @@
 # Insyto
 
-Insyto is a knowledge sharing platform built by Marc-Andre Giroux and Igor Miller using [Relayl](https://facebook.github.io/relay).
+Insyto is a knowledge sharing platform built by Marc-Andre Giroux and Igor Miller using [Relay](https://facebook.github.io/relay).
 
 ## Installation
 
