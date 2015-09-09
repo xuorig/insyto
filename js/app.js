@@ -1,5 +1,5 @@
 import App from './components/App';
-import Course from './components/Course';
+import Course from './components/Course/Course';
 import AppHomeRoute from './routes/AppHomeRoute';
 import CourseRoute from './routes/CourseRoute';
 
@@ -9,7 +9,7 @@ Relay.injectNetworkLayer(
 
 React.render(
   <Relay.RootContainer
-    Component={Course}
+    Component={App}
     route={new CourseRoute()}
   />,
   document.getElementById('root')

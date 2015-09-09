@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import {Schema} from './data/schema';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const APP_PORT = 8080;
 const GRAPHQL_PORT = 3000;
@@ -13,12 +13,30 @@ var compiler = webpack({
   module: {
     loaders: [
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+      },
+      {
         test: /\.js$/,
         loader: 'babel',
         query: {stage: 0, plugins: ['./build/babelRelayPlugin']}
-      }
+      },
+
     ]
   },
+  postcss: [
+    require('autoprefixer-core'),
+    require('postcss-color-rebeccapurple')
+  ],
+
+  resolve: {
+    modulesDirectories: ['node_modules', 'components']
+  },
+
+  plugins: [
+    new ExtractTextPlugin('style.css', { allChunks: true }),
+  ],
+
   output: {filename: 'app.js', path: '/'}
 });
 var app = new WebpackDevServer(compiler, {

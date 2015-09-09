@@ -1,11 +1,12 @@
 import 'babel/polyfill';
-import Course from './Course';
+import Course from './Course/Course';
+import 'normalize.css';
+import styles from './App.css';
 
 class App extends React.Component {
   render() {
-    console.log(this.props);
     return (
-      <Course/>
+      <Course course={this.props.course}/>
     );
   }
 }
@@ -14,16 +15,7 @@ export default Relay.createContainer(App, {
   fragments: {
     course: () => Relay.QL`
       fragment on Course {
-        name
-        description
-        lectures(first: 10) {
-          edges {
-            node {
-              name
-              description
-            }
-          }
-        }
+        ${Course.getFragment('course')}
       }
     `,
   },
