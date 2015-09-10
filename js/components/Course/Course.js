@@ -7,7 +7,6 @@ class Course extends React.Component {
   render() {
     return (
       <div className={styles.course}>
-        <h1>{this.props.course.name} - {this.props.course.description}</h1>
         <LectureList course={this.props.course}/>
       </div>
     );

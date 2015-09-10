@@ -1,12 +1,18 @@
 import 'babel/polyfill';
 import Course from './Course/Course';
+import NavBar from './NavBar/NavBar'
 import 'normalize.css';
 import styles from './App.css';
 
 class App extends React.Component {
   render() {
     return (
-      <Course course={this.props.course}/>
+      <div>
+        <NavBar/>
+        <main className={styles.main}>
+          <Course course={this.props.course}/>
+        </main>
+      </div>
     );
   }
 }
