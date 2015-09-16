@@ -1,3 +1,6 @@
+import React from 'react';
+import Relay from 'react-relay';
+
 import 'babel/polyfill';
 import styles from './NavBar.css';
 

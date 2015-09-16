@@ -1,0 +1,16 @@
+:local(.load_more) {
+  margin-top: 10px;
+  color: #F06544;
+  margin: 0 auto;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #F06544;
+  padding: 8px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+:local(.load_more:hover) {
+  color: #CA3F1E;
+  border: 1px solid #CA3F1E;
+}

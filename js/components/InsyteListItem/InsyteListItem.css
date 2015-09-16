@@ -1,0 +1,33 @@
+:local(.lecture) {
+  background-color: #fff;
+  border: 1px solid #edeeee;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+:local(.lecture__heading) {
+  padding: 20px;
+  display: flex;
+  border-bottom: 1px solid #edeeee;
+}
+
+:local(.lecture__heading--name) {
+  flex: 1;
+}
+
+:local(.lecture__heading--name a) {
+  color: #F06544;
+  text-decoration: none;
+}
+
+:local(.lecture__heading--date) {
+  color: rgb(165, 167, 170);
+}
+
+:local(.lecture__body) {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #edeeee;
+}

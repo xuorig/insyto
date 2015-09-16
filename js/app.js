@@ -1,16 +1,19 @@
-import App from './components/App';
-import Course from './components/Course/Course';
-import AppHomeRoute from './routes/AppHomeRoute';
-import CourseRoute from './routes/CourseRoute';
+import React from 'react';
+import Relay from 'react-relay';
+
+import {Router} from 'react-router';
+import {history} from 'react-router/lib/HashHistory';
+import ReactRouterRelay from 'react-router-relay';
+import routes from './routes';
 
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer('http://localhost:3000/queries')
 );
 
 React.render(
-  <Relay.RootContainer
-    Component={App}
-    route={new CourseRoute()}
+  <Router
+    createElement={ReactRouterRelay.createElement}
+    history={history} routes={routes}
   />,
   document.getElementById('root')
 );

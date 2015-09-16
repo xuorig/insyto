@@ -1,5 +1,8 @@
+import React from 'react';
+import Relay from 'react-relay';
+
 import 'babel/polyfill';
-import Course from './Course/Course';
+import InsyteList from './InsyteList/InsyteList';
 import NavBar from './NavBar/NavBar'
 import 'normalize.css';
 import styles from './App.css';
@@ -10,7 +13,7 @@ class App extends React.Component {
       <div>
         <NavBar/>
         <main className={styles.main}>
-          <Course course={this.props.course}/>
+          <InsyteList viewer={this.props.viewer}/>
         </main>
       </div>
     );
@@ -19,9 +22,9 @@ class App extends React.Component {
 
 export default Relay.createContainer(App, {
   fragments: {
-    course: () => Relay.QL`
-      fragment on Course {
-        ${Course.getFragment('course')}
+    viewer: () => Relay.QL`
+      fragment on User {
+        ${InsyteList.getFragment('viewer')}
       }
     `,
   },
