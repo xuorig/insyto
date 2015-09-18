@@ -2,8 +2,13 @@ import React from 'react';
 import {Route} from 'react-router';
 
 import ViewerQueries from './queries/ViewerQueries';
+import InsyteQueries from './queries/InsyteQueries';
+
 
 import App from './components/App';
+import InsyteList from './components/InsyteList/InsyteList';
+import Insyte from './components/Insyte/Insyte';
+import Quiz from './components/Quiz/Quiz';
 
 export default (
   <Route
@@ -11,12 +16,16 @@ export default (
     queries={ViewerQueries}
   >
     <Route
-      path="/" component={App}
+      path="/" component={InsyteList}
       queries={ViewerQueries}
     />
     <Route
-      path="/lecture/:id" component={App}
-      queries={ViewerQueries}
+      path="/insyte/:id" component={Insyte}
+      queries={InsyteQueries}
+    />
+    <Route
+      path="/insyte/:id/quiz" component={Quiz}
+      queries={InsyteQueries}
     />
   </Route>
 );

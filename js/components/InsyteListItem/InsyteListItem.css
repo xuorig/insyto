@@ -1,33 +1,57 @@
-:local(.lecture) {
+:local(.insyte) {
   background-color: #fff;
   border: 1px solid #edeeee;
   border-radius: 3px;
   margin-bottom: 10px;
 }
 
-:local(.lecture__heading) {
+:local(.insyte__heading) {
   padding: 20px;
   display: flex;
   border-bottom: 1px solid #edeeee;
 }
 
-:local(.lecture__heading--name) {
+:local(.insyte__heading--name) {
   flex: 1;
 }
 
-:local(.lecture__heading--name a) {
+:local(.insyte__heading--name a) {
   color: #F06544;
   text-decoration: none;
 }
 
-:local(.lecture__heading--date) {
+:local(.insyte__heading--date) {
   color: rgb(165, 167, 170);
 }
 
-:local(.lecture__body) {
+:local(.insyte__body) {
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-bottom: 1px solid #edeeee;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+:local(.insyte__footer) {
+  border-top: 1px solid #edeeee;
+  display: flex;
+  color: rgb(165, 167, 170);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+:local(.insyte__footer__topic) {
+  flex: 1;
+}
+
+
+:local(.insyte__footer__topic a) {
+  flex: 1;
+  text-decoration: none;
+  color: rgb(165, 167, 170);
+}
+
+:local(.insyte__footer__rating) {
+  display: flex;
 }

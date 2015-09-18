@@ -1,0 +1,20 @@
+:local(a) {
+  text-decoration: none;
+}
+
+:local(.button) {
+  color: #F06544;
+  margin: 20px auto;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #F06544;
+  padding: 8px;
+  border-radius: 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+:local(.button:hover) {
+  color: #CA3F1E;
+  border: 1px solid #CA3F1E;
+}

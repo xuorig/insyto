@@ -13,7 +13,7 @@ class App extends React.Component {
       <div>
         <NavBar/>
         <main className={styles.main}>
-          <InsyteList viewer={this.props.viewer}/>
+          {this.props.children}
         </main>
       </div>
     );
