@@ -4,6 +4,7 @@ import Relay from 'react-relay';
 import 'babel/polyfill';
 import styles from './Insyte.css';
 import Button from '../Shared/Buttons/Button';
+import Media from '../Media/Media'
 
 class Insyte extends React.Component {
   render() {
@@ -11,17 +12,13 @@ class Insyte extends React.Component {
       <div>
         <div className={styles.insyte}>
           <div className={styles.insyte__heading}>
-            <div className={styles['insyte__heading__title']}>{this.props.insyte.title} - {this.props.insyte.description}</div>
+            <div className={styles['insyte__heading__title']}>{this.props.insyte.title}</div>
             <div className={styles['insyte__heading__date']}>September 28th 2015</div>
           </div>
           <div className={styles.insyte__body}>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
-            <div className={styles.insyte__body__video}>
-              <video id="example_video_1" className={styles.insyte__body__video__video}
-                controls preload="auto" width="640" height="264"
-                poster="http://video-js.zencoder.com/oceans-clip.png">
-                <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
-              </video>
+            <div className={styles.insyte__body__content}>
+              <p>{this.props.insyte.description}</p>
+              <Media media={this.props.insyte.media}/>
             </div>
             <Button href="#/insyte/1/quiz" text='answer quiz'/>
           </div>
@@ -42,6 +39,9 @@ export default Relay.createContainer(Insyte, {
       fragment on Insyte {
           title
           description
+          media {
+            ${Media.getFragment('media')}
+          }
       }
     `,
   },

@@ -28,14 +28,10 @@
   border-bottom: 1px solid #edeeee;
 }
 
-:local(.insyte__body__video) {
+:local(.insyte__body__content) {
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
-}
-
-:local(.insyte__body__video__video) {
-  width: 100%;
 }
 
 :local(.insyte__footer) {
