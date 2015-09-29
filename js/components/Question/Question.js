@@ -2,15 +2,20 @@ import React from 'react';
 import Relay from 'react-relay';
 import 'babel/polyfill';
 import styles from './Question.css';
+import Answer from '../Answer/Answer';
 
 class Question extends React.Component {
   render() {
+    var question = this.props.question;
+    console.log(question);
     return (
       <div className={styles.question}>
-        <div className={styles.question}>
-          Whats the biggest animal on earth ?
+        {question.content}
+        <div className={styles.answer_list}>
+          {question.answers.edges.map(
+            answer => <Answer key={answer.node.id} answer={answer.node}/>
+          )}
         </div>
-        <AnswerList/>
       </div>
     );
   }
@@ -18,9 +23,19 @@ class Question extends React.Component {
 
 export default Relay.createContainer(Question, {
   fragments: {
-    insyte: () => Relay.QL`
-      fragment on Insyte {
-        title
+    question: () => Relay.QL`
+      fragment on Question {
+        id
+        content
+        answers(first: 4) {
+          edges {
+            node {
+              id
+              ${Answer.getFragment('answer')}
+            }
+          }
+        }
+
       }
     `
   },

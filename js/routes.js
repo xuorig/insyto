@@ -3,6 +3,7 @@ import {Route} from 'react-router';
 
 import ViewerQueries from './queries/ViewerQueries';
 import InsyteQueries from './queries/InsyteQueries';
+import QuizQueries from './queries/QuizQueries';
 
 
 import App from './components/App';
@@ -25,7 +26,7 @@ export default (
     />
     <Route
       path="/insyte/:id/quiz" component={Quiz}
-      queries={InsyteQueries}
+      queries={QuizQueries}
     />
   </Route>
 );
