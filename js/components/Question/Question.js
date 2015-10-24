@@ -7,13 +7,17 @@ import Answer from '../Answer/Answer';
 class Question extends React.Component {
   render() {
     var question = this.props.question;
-    console.log(question);
     return (
       <div className={styles.question}>
-        {question.content}
+        <div className={styles.question__title}>{question.content}</div>
         <div className={styles.answer_list}>
           {question.answers.edges.map(
-            answer => <Answer key={answer.node.id} answer={answer.node}/>
+            answer => <Answer key={answer.node.id}
+                              answer={answer.node}
+                              questionId={question.id}
+                              submitted={this.props.submitted}
+                              accepted={this.props.question.accepted_answer.__dataID__ === answer.node.id}
+                              onGoodAnswerSelected={this.props.onGoodAnswerSelected} />
           )}
         </div>
       </div>
@@ -27,6 +31,7 @@ export default Relay.createContainer(Question, {
       fragment on Question {
         id
         content
+        accepted_answer
         answers(first: 4) {
           edges {
             node {

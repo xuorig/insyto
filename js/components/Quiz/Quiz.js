@@ -6,9 +6,40 @@ import Button from '../Shared/Buttons/Button';
 import Question from '../Question/Question';
 
 class Quiz extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        submitted: false,
+        score: 0
+      };
+  }
+
+  // Tell children through props that the questions have been submitted
+  onSubmitAnswers(e) {
+    e.preventDefault();
+    console.log("Answers submitted");
+    this.setState({submitted: true});
+  }
+
+  // When submitted, the question returns its result (0 or 1)
+  // Add it to the answer scores array
+  onGoodAnswerSelected() {
+    console.log("good!");
+    this.setState((previousState, currentProps) => {
+      return {score: previousState.score + 1};
+    });
+    console.log(this.state.score);
+  }
+
   render() {
     var questions = this.props.quiz.questions;
-    console.log(questions);
+    var resultContent;
+    if (this.state.submitted) {
+      resultContent = <span>{this.state.score} / {questions.edges.length}</span>;
+    } else {
+      resultContent = <span>Submit your answers to get your score!</span>;
+    }
+
     return (
       <div>
         <div className={styles.insyte}>
@@ -18,11 +49,17 @@ class Quiz extends React.Component {
           </div>
           <div className={styles.question_list}>
             {questions.edges.map(
-              question => <Question key={question.node.id} question={question.node}/>
+              question => <Question key={question.node.id}
+                                    question={question.node}
+                                    submitted={this.state.submitted}
+                                    onGoodAnswerSelected={this.onGoodAnswerSelected.bind(this, 1)}/>
             )}
           </div>
+          <div className={styles.quiz__result}>
+            {resultContent}
+          </div>
           <div className={styles.insyte__body}>
-            <Button href="#/insyte/1/quiz" text='Submit answers'/>
+            <Button text='Submit answers' onClickFunc={(e) => this.onSubmitAnswers(e)}/>
           </div>
         </div>
         <div className={styles.insyte__footer}>

@@ -44,3 +44,11 @@
 :local(.insyte__footer__new) {
 
 }
+
+:local(.quiz__result) {
+  padding-top: 10px;
+  margin: auto;
+  width: 70%;
+  text-align: center;
+  font-size: 1.7em;
+}

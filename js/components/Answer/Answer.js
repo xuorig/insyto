@@ -4,12 +4,35 @@ import 'babel/polyfill';
 import styles from './Answer.css';
 
 class Answer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      answerClass: styles.answer,
+      checked: false
+    }
+    this._radio = {};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.submitted && nextProps.submitted) {
+      if (this.state.checked && !nextProps.accepted) {
+        this.setState({answerClass: styles.answer + " " + styles["answer--bad"]});
+      } else if (this.state.checked && nextProps.accepted) {
+        this.setState({answerClass: styles.answer + " " + styles["answer--good"]});
+        nextProps.onGoodAnswerSelected();
+      }
+    }
+  }
+
+  handleChange(event) {
+    this.setState({checked: event.target.checked});
+  }
+
   render() {
     return (
-        <div>
-         <input id={this.props.answer.id} name="1" type="radio" value="1" />
-         <label htmlFor={this.props.answer.id}><span>label 1</span></label>
-         {this.props.answer.content}
+        <div className={this.state.answerClass}>
+         <input id={this.props.answer.id} name={this.props.questionId} type="radio" onChange={this.handleChange.bind(this)}/>
+         <label for={this.props.answer.id} className={styles["answer__content"]}>{this.props.answer.content}</label>
         </div>
     );
   }
