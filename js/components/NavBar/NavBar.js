@@ -9,7 +9,7 @@ class NavBar extends React.Component {
     return (
       <nav className={styles.navbar}>
         <div className={styles.navbar__content}>
-          <div className={styles.navbar__content__brand}></div>
+          <a href="#"><div className={styles.navbar__content__brand}></div></a>
         </div>
       </nav>
     );
