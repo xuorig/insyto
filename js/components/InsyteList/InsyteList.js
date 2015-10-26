@@ -29,9 +29,9 @@ class InsyteList extends React.Component {
   onSearch(title) {
     this.setState({searching: true});
     //Weird bug with empty string arguments in graphql-ruby
-    if (title == '') {
-      title = null
-    }
+    // if (title == '') {
+    //   title = null
+    // }
     this.props.relay.setVariables({
       title: title
     }, (readyState) => {
