@@ -45,7 +45,7 @@ var compiler = webpack({
 });
 var app = new WebpackDevServer(compiler, {
   contentBase: '/public/',
-  proxy: {'/queries': `http://localhost:${GRAPHQL_PORT}`},
+  proxy: {'/queries': `http://localhost:${GRAPHQL_PORT}/v1`},
   publicPath: '/js/',
   stats: {colors: true}
 });

@@ -6,8 +6,15 @@ import {history} from 'react-router/lib/HashHistory';
 import ReactRouterRelay from 'react-router-relay';
 import routes from './routes';
 
+var token = localStorage.getItem('insyto_token');
+console.log(token);
+
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer('http://localhost:3000/queries')
+  new Relay.DefaultNetworkLayer('http://localhost:3000/v1/queries', {
+    headers: {
+      Authorization: token
+    }
+  })
 );
 
 React.render(
