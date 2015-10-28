@@ -9,7 +9,11 @@ class NavBar extends React.Component {
     return (
       <nav className={styles.navbar}>
         <div className={styles.navbar__content}>
-          <a href="#"><div className={styles.navbar__content__brand}></div></a>
+          <div className={styles.navbar__content__left}></div>
+          <div className={styles.navbar__content__brand}><a href="#"></a></div>
+          <div className={styles.navbar__content__login}>
+            <a href="#/login" className={styles['navbar__content__login__login-link']}>Sign In</a>
+          </div>
         </div>
       </nav>
     );

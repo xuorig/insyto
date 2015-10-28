@@ -10,6 +10,7 @@ import App from './components/App';
 import InsyteList from './components/InsyteList/InsyteList';
 import Insyte from './components/Insyte/Insyte';
 import Quiz from './components/Quiz/Quiz';
+import LoginPage from './components/LoginPage/LoginPage';
 
 export default (
   <Route
@@ -19,6 +20,9 @@ export default (
     <Route
       path="/" component={InsyteList}
       queries={ViewerQueries}
+    />
+    <Route
+      path="/login" component={LoginPage}
     />
     <Route
       path="/insyte/:id" component={Insyte}

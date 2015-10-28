@@ -40,7 +40,7 @@
 }
 
 :local(.insyte__footer a) {
-  text-decoration: none;
+    text-decoration: none;
     color: #F06544;
 }
 
