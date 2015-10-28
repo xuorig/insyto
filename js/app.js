@@ -9,11 +9,11 @@ import routes from './routes';
 var token = localStorage.getItem('insyto_token');
 console.log(token);
 
+var headers = token ? {Authorization: token} : {}
+
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer('http://localhost:3000/v1/queries', {
-    headers: {
-      Authorization: token
-    }
+    headers: headers
   })
 );
 
