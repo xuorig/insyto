@@ -1,0 +1,17 @@
+:local(input) {
+  padding: 24px;
+  border: solid 1px #edeeee;
+  transition: box-shadow 0.3s, border 0.3s;
+  height: 55px;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 1.5em;
+  color: #333333;
+  margin: auto 0px 15px;
+  box-sizing: border-box;
+}
+:local(input:focus) {
+  outline: none;
+  border: solid 1px #edeeee;
+  box-shadow: 0 0 5px 1px #ECECEC;
+}

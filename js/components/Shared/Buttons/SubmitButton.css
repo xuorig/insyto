@@ -1,0 +1,13 @@
+:local(.button) {
+  text-align: center;
+  border-radius: 3px;
+  background-color: #F06544;
+  color: white;
+  padding: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+:local(.button:hover) {
+  background-color: #D74C2B;
+}
