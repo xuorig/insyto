@@ -7,9 +7,9 @@ import styles from './SubmitButton.css';
 class SubmitButton extends React.Component {
   render() {
     return (
-      <div className={styles.button} href={this.props.href || '#'} onClick={this.props.onClickFunc}>
+      <button type="submit" className={styles.button} onClick={this.props.onSubmitFunc}>
         {this.props.text}
-      </div>
+      </button>
     );
   }
 }

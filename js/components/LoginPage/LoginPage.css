@@ -1,4 +1,4 @@
-:local(input) {
+:local(.signinform) {
   padding: 24px;
   border: solid 1px #edeeee;
   transition: box-shadow 0.3s, border 0.3s;
@@ -10,7 +10,7 @@
   margin: auto 0px 15px;
   box-sizing: border-box;
 }
-:local(input:focus) {
+:local(.signinform:focus) {
   outline: none;
   border: solid 1px #edeeee;
   box-shadow: 0 0 5px 1px #ECECEC;

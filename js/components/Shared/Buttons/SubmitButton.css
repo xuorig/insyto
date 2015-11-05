@@ -6,8 +6,11 @@
   padding: 8px;
   padding-left: 32px;
   padding-right: 32px;
+  width: 100%;
+  border: none;
 }
 
 :local(.button:hover) {
+  cursor: pointer;
   background-color: #D74C2B;
 }

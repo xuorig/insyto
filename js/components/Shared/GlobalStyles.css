@@ -10,6 +10,14 @@
   padding: 25px;
 }
 
+:global(.insyto-container__message) {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  padding-bottom: 20px;
+  color: rgb(242, 116, 116);
+}
+
 :global(.form-field-container) {
   width: 50%;
   margin: 0 auto;
