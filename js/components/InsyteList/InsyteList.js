@@ -80,7 +80,7 @@ export default Relay.createContainer(InsyteList, {
   },
   fragments: {
     viewer: () => Relay.QL`
-      fragment on User {
+      fragment on Viewer {
         insytes(first: $count, title: $title) {
           edges {
             node {
