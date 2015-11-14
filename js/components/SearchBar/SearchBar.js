@@ -27,9 +27,14 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
+      <div>
         <input type="text" className={styles['search-bar']}
                            placeholder="I want to learn about..."
                            onChange={this.onChange.bind(this)}/>
+      </div>
+      <div className={styles['add-insyte']}>
+        <div><a href="#/new" className={styles['add-insyte__link']}>Add an insyte</a></div>
+      </div>
       </div>
     );
   }

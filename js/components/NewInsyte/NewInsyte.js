@@ -48,13 +48,13 @@ class AddInsyte extends React.Component {
         <form>
         <p className={'insyto-container__message'}>{this.state.message}</p>
         <div className={'form-field-container'}>
-          <input name="title" type="text" placeholder="Insyte Title" className={styles.signinform} ref='title'/>
+          <input name="title" type="text" placeholder="Insyte Title" className='insyte-field' ref='title'/>
         </div>
         <div className={'form-field-container'}>
-          <input name="description" type="text" placeholder="Short Description" className={styles.signinform} ref='description'/>
+          <input name="description" type="text" placeholder="Short Description" className='insyte-field' ref='description'/>
         </div>
         <div className={'form-field-container'}>
-          <input name="url" type="text" placeholder="Media URL" className={styles.signinform} ref='url'/>
+          <input name="url" type="text" placeholder="Media URL" className='insyte-field' ref='url'/>
         </div>
         <div className={'form-field-container form-field-container--submit'}>
           <SubmitButton onSubmitFunc={this.onInsyteSubmit.bind(this)} text="Submit New Insyte"/>
