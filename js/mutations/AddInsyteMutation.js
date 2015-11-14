@@ -1,4 +1,3 @@
-import React from 'react';
 import Relay from 'react-relay';
 
 export default class AddInsyteMutation extends Relay.Mutation {
@@ -24,16 +23,16 @@ export default class AddInsyteMutation extends Relay.Mutation {
     `;
   }
   getConfigs() {
-    return [{
-      type: 'RANGE_ADD',
-      parentName: 'viewer',
-      parentID: this.props.viewer.id,
-      connectionName: 'insytes',
-      edgeName: 'newInsyteEdge',
-      rangeBehaviors: {
-        '': 'append',
-        'orderby(newest)': 'prepend',
-      },
-    }];
-  }
+      return [{
+        type: 'REQUIRED_CHILDREN',
+        // Forces these fragments to be included in the query
+        children: [Relay.QL`
+          fragment on AddInsytePayload {
+            newInsyteEdge {
+              rails_id
+            }
+          }
+        `],
+      }];
+    }
 }

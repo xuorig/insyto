@@ -18,13 +18,28 @@ class AddInsyte extends React.Component {
 
   onInsyteSubmit(e) {
     e.preventDefault();
+    let title = this.refs.title.value;
+    let description = this.refs.description.value;
+    let url = this.refs.url.value;
+
+    var onSuccess = (response) => {
+      console.log(response);
+      console.log('Mutation successful!');
+      let insyte_id = response.addInsyte.newInsyteEdge.rails_id;
+      window.location.href = `#/insyte/${insyte_id}`;
+    };
+    var onFailure = (transaction) => {
+      var error = transaction.getError() || new Error('Mutation failed.');
+      console.error(error);
+    };
+
     Relay.Store.update(new AddInsyteMutation({
-      title: 'Some New Insyte',
-      description: 'Description of the insyte',
+      title: title,
+      description: description,
       type: 'video',
-      url: 'http://google.com',
+      url: url,
       viewer: this.props.viewer
-    }));
+    }), {onFailure, onSuccess});
   }
 
   render() {
@@ -33,10 +48,10 @@ class AddInsyte extends React.Component {
         <form>
         <p className={'insyto-container__message'}>{this.state.message}</p>
         <div className={'form-field-container'}>
-          <input name="title" type="text" placeholder="Insyte Title" className={styles.signinform} ref='email'/>
+          <input name="title" type="text" placeholder="Insyte Title" className={styles.signinform} ref='title'/>
         </div>
         <div className={'form-field-container'}>
-          <input name="description" type="text" placeholder="Short Description" className={styles.signinform} ref='pass'/>
+          <input name="description" type="text" placeholder="Short Description" className={styles.signinform} ref='description'/>
         </div>
         <div className={'form-field-container'}>
           <input name="url" type="text" placeholder="Media URL" className={styles.signinform} ref='url'/>
@@ -53,8 +68,8 @@ class AddInsyte extends React.Component {
 export default Relay.createContainer(AddInsyte, {
   fragments: {
     viewer: () => Relay.QL`
-      fragment on User {
-          id
+      fragment on Viewer {
+        currentUser
       }
     `,
   },
