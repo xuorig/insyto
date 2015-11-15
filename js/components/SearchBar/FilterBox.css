@@ -1,0 +1,7 @@
+:local(.filter-box) {
+
+}
+
+:local(.filter-box--hidden) {
+  display: none;
+}

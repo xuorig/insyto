@@ -35,7 +35,6 @@ class LoginPage extends React.Component {
             }
           } else {
             let json = JSON.parse(res.text);
-            console.log(json);
             localStorage.setItem('insyto_token', json.access_token);
             window.location = "/";
             // TO DO LOG USER IN

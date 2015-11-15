@@ -16,15 +16,24 @@
 
 :local(.add-insyte) {
   text-align: right;
-  padding-top: 15px;
+  padding-top: 5px;
   padding-bottom: 15px;
   margin-bottom: 20px;
 }
 :local(.add-insyte__link) {
   color: #F06544;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1em;
 }
+
+:local(.filter-insyte__link) {
+  color: #F06544;
+  text-decoration: none;
+  font-size: 1em;
+  float: left;
+}
+
+
 :local(.add-insyte__link:hover) {
    color: #D74C2B;
 }

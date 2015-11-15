@@ -61,7 +61,6 @@ class InsyteList extends React.Component {
         insyte => <InsyteListItem key={insyte.node.rails_id} insyte={insyte.node}/>
       )}</div> : <p className={styles['query-info']}>No results found, please try again with another query.</p>
     }
-    console.log(insytes);
 
     return (
       <div>

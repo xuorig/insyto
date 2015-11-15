@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar viewer={this.props.viewer}/>
         <main className={styles.main}>
           {this.props.children}
         </main>
@@ -24,6 +24,7 @@ export default Relay.createContainer(App, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
+        ${NavBar.getFragment('viewer')}
         ${InsyteList.getFragment('viewer')}
       }
     `,

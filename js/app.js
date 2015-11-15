@@ -7,8 +7,6 @@ import ReactRouterRelay from 'react-router-relay';
 import routes from './routes';
 
 var token = localStorage.getItem('insyto_token');
-console.log(token);
-
 var headers = token ? {Authorization: token} : {}
 
 Relay.injectNetworkLayer(

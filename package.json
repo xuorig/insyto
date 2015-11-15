@@ -29,6 +29,7 @@
     "react-relay": "^0.2.1",
     "react-router": "^1.0.0-beta3",
     "react-router-relay": "^0.4.4",
+    "react-video": "^1.5.3",
     "style-loader": "^0.12.3",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.6",

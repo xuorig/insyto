@@ -16,7 +16,7 @@ class InsyteListItem extends React.Component {
           <p>{this.props.insyte.description}</p>
         </div>
         <div className={styles.insyte__footer}>
-          <div className={styles.insyte__footer__topic}><a href="#">Earth and Geography</a></div>
+          <div className={styles.insyte__footer__topic}><a href={`#/${this.props.insyte.categoryName}`}>{this.props.insyte.categoryName}</a></div>
           <div className={styles.insyte__footer__rating}>4.5/5</div>
         </div>
       </div>
@@ -31,6 +31,7 @@ export default Relay.createContainer(InsyteListItem, {
         rails_id
         title
         description
+        categoryName
       }
     `
   }

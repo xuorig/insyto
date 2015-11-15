@@ -17,18 +17,15 @@ class Quiz extends React.Component {
   // Tell children through props that the questions have been submitted
   onSubmitAnswers(e) {
     e.preventDefault();
-    console.log("Answers submitted");
     this.setState({submitted: true});
   }
 
   // When submitted, the question returns its result (0 or 1)
   // Add it to the answer scores array
   onGoodAnswerSelected() {
-    console.log("good!");
     this.setState((previousState, currentProps) => {
       return {score: previousState.score + 1};
     });
-    console.log(this.state.score);
   }
 
   render() {
