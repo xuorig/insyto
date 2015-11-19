@@ -76,7 +76,7 @@ function refragmentRelayQuery(node) {
     }
   });
   _Object$keys(fieldsByType).forEach(function (type) {
-    children.push(RelayQuery.Node.buildFragment('refragmentRelayQuery', type, fieldsByType[type]));
+    children.push(RelayQuery.Fragment.build('refragmentRelayQuery', type, fieldsByType[type]));
   });
   return node.clone(children);
 }

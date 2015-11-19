@@ -1,0 +1,128 @@
+'use strict';
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _extends = require('babel-runtime/helpers/extends')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRelay = require('react-relay');
+
+var _reactRelay2 = _interopRequireDefault(_reactRelay);
+
+var _reactRouter = require('react-router');
+
+var _RouteAggregator = require('./RouteAggregator');
+
+var _RouteAggregator2 = _interopRequireDefault(_RouteAggregator);
+
+var _RouteContainer = require('./RouteContainer');
+
+var _RouteContainer2 = _interopRequireDefault(_RouteContainer);
+
+var RootComponent = (function (_React$Component) {
+  _inherits(RootComponent, _React$Component);
+
+  _createClass(RootComponent, null, [{
+    key: 'displayName',
+    value: 'ReactRouterRelay.RootComponent',
+    enumerable: true
+  }, {
+    key: 'propTypes',
+    value: {
+      createElement: _react2['default'].PropTypes.func.isRequired,
+      location: _react2['default'].PropTypes.object.isRequired
+    },
+    enumerable: true
+  }, {
+    key: 'childContextTypes',
+    value: {
+      routeAggregator: _react2['default'].PropTypes.instanceOf(_RouteAggregator2['default']).isRequired
+    },
+    enumerable: true
+  }, {
+    key: 'defaultProps',
+    value: {
+      createElement: _react2['default'].createElement
+    },
+    enumerable: true
+  }]);
+
+  function RootComponent(props, context) {
+    var _this = this;
+
+    _classCallCheck(this, RootComponent);
+
+    _React$Component.call(this, props, context);
+
+    this.createElement = function (Component, props) {
+      return _react2['default'].createElement(_RouteContainer2['default'], _extends({}, props, {
+        Component: Component,
+        createElement: _this.props.createElement
+      }));
+    };
+
+    this.renderFailure = function (error, retry) {
+      _this._routeAggregator.setFailure(error, retry);
+      return _this.renderComponent();
+    };
+
+    this.renderFetched = function (data, readyState) {
+      _this._routeAggregator.setFetched(data, readyState);
+      return _this.renderComponent();
+    };
+
+    this.renderLoading = function () {
+      _this._routeAggregator.setLoading();
+      return _this.renderComponent();
+    };
+
+    this._routeAggregator = new _RouteAggregator2['default']();
+    this._routeAggregator.updateRoute(props);
+  }
+
+  RootComponent.prototype.getChildContext = function getChildContext() {
+    return {
+      routeAggregator: this._routeAggregator
+    };
+  };
+
+  RootComponent.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (nextProps.location === this.props.location) {
+      return;
+    }
+
+    this._routeAggregator.updateRoute(nextProps);
+  };
+
+  RootComponent.prototype.renderComponent = function renderComponent() {
+    return _react2['default'].createElement(_reactRouter.RoutingContext, _extends({}, this.props, {
+      createElement: this.createElement
+    }));
+  };
+
+  RootComponent.prototype.render = function render() {
+    return _react2['default'].createElement(_reactRelay2['default'].RootContainer, _extends({}, this.props, {
+      Component: this._routeAggregator,
+      renderFailure: this.renderFailure,
+      renderFetched: this.renderFetched,
+      renderLoading: this.renderLoading,
+      route: this._routeAggregator.route
+    }));
+  };
+
+  return RootComponent;
+})(_react2['default'].Component);
+
+exports['default'] = RootComponent;
+module.exports = exports['default'];

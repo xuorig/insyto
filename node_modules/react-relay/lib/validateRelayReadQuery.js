@@ -93,7 +93,7 @@ if (process.env.NODE_ENV !== 'production') {
       };
 
       RelayStoreReadValidator.prototype.visitFragment = function visitFragment(node, aliasMap) {
-        if (this._traverseFragmentReferences || !node.isReferenceFragment()) {
+        if (this._traverseFragmentReferences || !node.isContainerFragment()) {
           this.traverse(node, aliasMap);
         }
       };

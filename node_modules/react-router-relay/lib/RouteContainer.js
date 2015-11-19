@@ -1,0 +1,135 @@
+'use strict';
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _extends = require('babel-runtime/helpers/extends')['default'];
+
+var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactStaticContainer = require('react-static-container');
+
+var _reactStaticContainer2 = _interopRequireDefault(_reactStaticContainer);
+
+var _getParamsForRoute = require('./getParamsForRoute');
+
+var _getParamsForRoute2 = _interopRequireDefault(_getParamsForRoute);
+
+var _RouteAggregator = require('./RouteAggregator');
+
+var _RouteAggregator2 = _interopRequireDefault(_RouteAggregator);
+
+var RouteContainer = (function (_React$Component) {
+  _inherits(RouteContainer, _React$Component);
+
+  function RouteContainer() {
+    _classCallCheck(this, RouteContainer);
+
+    _React$Component.apply(this, arguments);
+  }
+
+  RouteContainer.prototype.render = function render() {
+    var _props = this.props;
+    var Component = _props.Component;
+    var createElement = _props.createElement;
+
+    var routerProps = _objectWithoutProperties(_props, ['Component', 'createElement']);
+
+    var route = routerProps.route;
+    var routeAggregator = this.context.routeAggregator;
+    var queries = route.queries;
+
+    if (!queries) {
+      return createElement(Component, routerProps);
+    }
+
+    var params = _getParamsForRoute2['default'](routerProps);
+
+    var _routeAggregator$getData = routeAggregator.getData(route, queries, params);
+
+    var failure = _routeAggregator$getData.failure;
+    var fragmentPointers = _routeAggregator$getData.fragmentPointers;
+    var readyState = _routeAggregator$getData.readyState;
+
+    var shouldUpdate = true;
+    var element = undefined;
+
+    // This is largely copied from RelayRootContainer#render.
+    if (failure) {
+      var renderFailure = route.renderFailure;
+
+      if (renderFailure) {
+        var error = failure[0];
+        var retry = failure[1];
+
+        element = renderFailure(error, retry);
+      } else {
+        element = null;
+      }
+    } else if (fragmentPointers) {
+      var data = _extends({}, routerProps, params, fragmentPointers);
+
+      var renderFetched = route.renderFetched;
+
+      if (renderFetched) {
+        element = renderFetched(data, readyState);
+      } else {
+        element = createElement(Component, data);
+      }
+    } else {
+      var renderLoading = route.renderLoading;
+
+      if (renderLoading) {
+        element = renderLoading();
+      } else {
+        element = undefined;
+      }
+
+      if (element === undefined) {
+        element = null;
+        shouldUpdate = false;
+      }
+    }
+
+    return _react2['default'].createElement(
+      _reactStaticContainer2['default'],
+      { shouldUpdate: shouldUpdate },
+      element
+    );
+  };
+
+  _createClass(RouteContainer, null, [{
+    key: 'displayName',
+    value: 'RouteContainer',
+    enumerable: true
+  }, {
+    key: 'propTypes',
+    value: {
+      Component: _react2['default'].PropTypes.func.isRequired,
+      createElement: _react2['default'].PropTypes.func.isRequired
+    },
+    enumerable: true
+  }, {
+    key: 'contextTypes',
+    value: {
+      routeAggregator: _react2['default'].PropTypes.instanceOf(_RouteAggregator2['default']).isRequired
+    },
+    enumerable: true
+  }]);
+
+  return RouteContainer;
+})(_react2['default'].Component);
+
+exports['default'] = RouteContainer;
+module.exports = exports['default'];

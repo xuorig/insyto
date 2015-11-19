@@ -27,6 +27,7 @@ class InsyteList extends React.Component {
   }
 
   onSearch(title) {
+    debugger;
     this.setState({searching: true});
     //Weird bug with empty string arguments in graphql-ruby
     // if (title == '') {
@@ -44,7 +45,6 @@ class InsyteList extends React.Component {
   render() {
     var insytes = this.props.viewer.insytes;
     var hasNextPage = this.props.viewer.insytes.pageInfo.hasNextPage;
-
     var loadMore;
     if (this.state.loading) {
       loadMore = <Spinner/>
@@ -75,12 +75,13 @@ class InsyteList extends React.Component {
 export default Relay.createContainer(InsyteList, {
   initialVariables: {
     count: 3,
-    title: null
+    title: null,
+    cat: null,
   },
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
-        insytes(first: $count, title: $title) {
+        insytes(first: $count, title: $title, cat: $cat) {
           edges {
             node {
               ${InsyteListItem.getFragment('insyte')}

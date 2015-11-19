@@ -73,7 +73,7 @@ var RelayQueryTracker = (function () {
       });
       trackedNodes.length = 0;
       trackedNodesByID.isFlattened = true;
-      var containerNode = RelayQuery.Node.buildFragment('RelayQueryTracker', 'Node', trackedChildren);
+      var containerNode = RelayQuery.Fragment.build('RelayQueryTracker', 'Node', trackedChildren);
       if (containerNode) {
         var flattenedNode = flattenRelayQuery(containerNode);
         if (flattenedNode) {

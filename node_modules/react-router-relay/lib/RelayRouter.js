@@ -1,0 +1,42 @@
+'use strict';
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _extends = require('babel-runtime/helpers/extends')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _RelayRoutingContext = require('./RelayRoutingContext');
+
+var _RelayRoutingContext2 = _interopRequireDefault(_RelayRoutingContext);
+
+var RelayRouter = (function (_React$Component) {
+  _inherits(RelayRouter, _React$Component);
+
+  function RelayRouter() {
+    _classCallCheck(this, RelayRouter);
+
+    _React$Component.apply(this, arguments);
+  }
+
+  RelayRouter.prototype.render = function render() {
+    return _react2['default'].createElement(_reactRouter.Router, _extends({
+      RoutingContext: _RelayRoutingContext2['default']
+    }, this.props));
+  };
+
+  return RelayRouter;
+})(_react2['default'].Component);
+
+exports['default'] = RelayRouter;
+module.exports = exports['default'];
