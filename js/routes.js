@@ -1,0 +1,30 @@
+import React from 'react';
+import { IndexRoute, Route } from 'react-router';
+
+import ViewerQueries from './queries/ViewerQueries';
+import InsyteQueries from './queries/InsyteQueries';
+import QuizQueries from './queries/QuizQueries';
+
+import App from './components/App';
+import InsyteList from './components/InsyteList/InsyteList';
+import Insyte from './components/Insyte/Insyte';
+import NewInsyte from './components/NewInsyte/NewInsyte';
+import Quiz from './components/Quiz/Quiz';
+import LoginPage from './components/LoginPage/LoginPage';
+
+export default (
+  <Route
+    path="/"
+    component={App}
+    queries={ViewerQueries}
+  >
+    <IndexRoute
+      component={InsyteList}
+      queries={ViewerQueries}
+    />
+    <Route
+      path="insyte/:id" component={Insyte}
+      queries={InsyteQueries}
+    />
+  </Route>
+)

@@ -1,5 +1,5 @@
-import React from 'react';
 import Relay from 'react-relay';
+import ReactDOM from 'react-dom';
 
 import 'babel/polyfill';
 import styles from './NavBar.css';

@@ -1,5 +1,5 @@
-import React from 'react';
 import Relay from 'react-relay';
+import ReactDOM from 'react-dom';
 
 import 'babel/polyfill';
 import InsyteListItem from '../InsyteListItem/InsyteListItem';
@@ -27,7 +27,6 @@ class InsyteList extends React.Component {
   }
 
   onSearch(title) {
-    debugger;
     this.setState({searching: true});
     //Weird bug with empty string arguments in graphql-ruby
     // if (title == '') {
