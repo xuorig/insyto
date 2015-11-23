@@ -1,3 +1,4 @@
+import React from 'react';
 import Relay from 'react-relay';
 import ReactDOM from 'react-dom';
 
@@ -16,6 +17,6 @@ Relay.injectNetworkLayer(
 );
 
 ReactDOM.render(
-  <RelayRouter history={createBrowserHistory()} routes={routes} />,
+  <RelayRouter routes={routes} />,
   document.getElementById('root')
 );

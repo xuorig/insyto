@@ -23,8 +23,19 @@ export default (
       queries={ViewerQueries}
     />
     <Route
-      path="insyte/:id" component={Insyte}
+      path="/login" component={LoginPage}
+    />
+    <Route
+      path="/insyte/:id" component={Insyte}
       queries={InsyteQueries}
+    />
+     <Route
+      path="/new" component={NewInsyte}
+      queries={ViewerQueries}
+    />
+    <Route
+      path="/insyte/:id/quiz" component={Quiz}
+      queries={QuizQueries}
     />
   </Route>
 )
