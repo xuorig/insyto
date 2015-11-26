@@ -5,12 +5,17 @@ export default class AddInsyteMutation extends Relay.Mutation {
     return Relay.QL`mutation {addInsyte}`;
   }
 
+  getFiles() {
+    return {
+      file: this.props.file
+    }
+  }
+
   getVariables() {
     return {
       title: this.props.title,
       description: this.props.description,
       type: this.props.type,
-      url: this.props.url
     };
   }
 

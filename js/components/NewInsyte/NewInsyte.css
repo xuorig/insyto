@@ -1,0 +1,16 @@
+:local(.dropzone) {
+  padding: 35px;
+  border: solid 1px #edeeee;
+  height: 120px;
+  margin-bottom: 30px;
+  width: 100%;
+  font-size: 1.5em;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+:local(.dropzone--active) {
+  outline: none;
+  border: solid 1px #edeeee;
+  box-shadow: 0 0 5px 1px #ECECEC;
+}

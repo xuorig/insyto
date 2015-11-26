@@ -2,6 +2,8 @@ import React from 'react';
 import Relay from 'react-relay';
 import 'babel/polyfill';
 
+import Dropzone from 'react-dropzone';
+
 import globalStyles from '../Shared/GlobalStyles.css';
 import styles from './NewInsyte.css';
 import Button from '../Shared/Buttons/Button';
@@ -12,7 +14,8 @@ class AddInsyte extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        message: null
+        message: null,
+        file: null,
       };
   }
 
@@ -20,7 +23,6 @@ class AddInsyte extends React.Component {
     e.preventDefault();
     let title = this.refs.title.value;
     let description = this.refs.description.value;
-    let url = this.refs.url.value;
 
     var onSuccess = (response) => {
       console.log(response);
@@ -37,9 +39,15 @@ class AddInsyte extends React.Component {
       title: title,
       description: description,
       type: 'video',
-      url: url,
+      file: this.state.file,
+      url: 'hello',
       viewer: this.props.viewer
     }), {onFailure, onSuccess});
+  }
+
+  onDrop(files) {
+    this.setState({file: files[0]});
+    console.log(this.state.file);
   }
 
   render() {
@@ -54,7 +62,11 @@ class AddInsyte extends React.Component {
           <input name="description" type="text" placeholder="Short Description" className='insyte-field' ref='description'/>
         </div>
         <div className={'form-field-container'}>
-          <input name="url" type="text" placeholder="Media URL" className='insyte-field' ref='url'/>
+          <Dropzone onDrop={this.onDrop.bind(this)}
+                    className={styles['dropzone']}
+                    activeClassName={styles['dropzone--active']}>
+            <div> Drop your video file right here to upload it </div>
+          </Dropzone>
         </div>
         <div className={'form-field-container form-field-container--submit'}>
           <SubmitButton onSubmitFunc={this.onInsyteSubmit.bind(this)} text="Submit New Insyte"/>

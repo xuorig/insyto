@@ -16,7 +16,11 @@ class InsyteListItem extends React.Component {
           <p>{this.props.insyte.description}</p>
         </div>
         <div className={styles.insyte__footer}>
-          <div className={styles.insyte__footer__topic}><a href={`#/?cat=1`}>{this.props.insyte.category.name}</a></div>
+          <div className={styles.insyte__footer__topic}>
+            <a href={`#/?cat=${this.props.insyte.category.rails_id}`}>
+              {this.props.insyte.category.name}
+            </a>
+          </div>
           <div className={styles.insyte__footer__rating}>4.5/5</div>
         </div>
       </div>

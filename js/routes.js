@@ -12,6 +12,15 @@ import NewInsyte from './components/NewInsyte/NewInsyte';
 import Quiz from './components/Quiz/Quiz';
 import LoginPage from './components/LoginPage/LoginPage';
 
+function prepareInsyteListParams(params, route) {
+  console.log(params);
+  return {
+    ...params,
+    cat: params.cat ? parseInt(params.cat) : null,
+  };
+};
+
+
 export default (
   <Route
     path="/"
@@ -21,6 +30,8 @@ export default (
     <IndexRoute
       component={InsyteList}
       queries={ViewerQueries}
+      queryParams={['cat']}
+      prepareParams={prepareInsyteListParams}
     />
     <Route
       path="/login" component={LoginPage}
