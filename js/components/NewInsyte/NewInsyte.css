@@ -1,11 +1,11 @@
 :local(.dropzone) {
   padding: 35px;
-  border: solid 1px #edeeee;
-  height: 120px;
+  border: dashed 2px #edeeee;
+  height: 150px;
   margin-bottom: 30px;
   width: 100%;
   font-size: 1.5em;
-  color: #333333;
+  color: #A9A9A9;
   box-sizing: border-box;
 }
 

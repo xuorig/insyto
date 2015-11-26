@@ -1,9 +1,19 @@
 :global(.insyto-container) {
+  text-align: center;
   background-color: #fff;
   border: 1px solid #edeeee;
   border-radius: 3px;
   margin-bottom: 10px;
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.14),0 6px 10px 0 rgba(0,0,0,.098),0 1px 18px 0 rgba(0,0,0,.084);
+  color: #333333;
+}
+
+:global(.insyto-heading) {
+  font-size: 1.5em;
+  color: #333333;
+  font-weight: 100;
+  padding: 0px;
+  margin: 0px;
 }
 
 :global(.insyto-container--large-padding) {
