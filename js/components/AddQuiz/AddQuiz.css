@@ -1,0 +1,19 @@
+:local(.add-answer-link) {
+  color: #F06544;
+  text-decoration: none;
+}
+
+:local(.question) {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #edeeee;
+}
+
+:local(.add-new-question) {
+  padding: 20px;
+}
+
+:local(.add-new-question--link) {
+  color: #F06544;
+  text-decoration: none;
+}

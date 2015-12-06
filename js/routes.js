@@ -9,6 +9,8 @@ import App from './components/App';
 import InsyteList from './components/InsyteList/InsyteList';
 import Insyte from './components/Insyte/Insyte';
 import NewInsyte from './components/NewInsyte/NewInsyte';
+import AddQuiz from './components/AddQuiz/AddQuiz';
+
 import Quiz from './components/Quiz/Quiz';
 import LoginPage from './components/LoginPage/LoginPage';
 
@@ -39,6 +41,10 @@ export default (
     <Route
       path="/insyte/:id" component={Insyte}
       queries={InsyteQueries}
+    />
+    <Route
+      path="/insyte/:id/addquiz" component={AddQuiz}
+      queries={ViewerQueries}
     />
      <Route
       path="/new" component={NewInsyte}

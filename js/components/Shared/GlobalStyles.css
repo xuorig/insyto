@@ -33,6 +33,10 @@
   margin: 0 auto;
 }
 
+:global(.form-field-container--right-align) {
+  text-align: right;
+}
+
 :global(.form-field-container--submit) {
   text-align: right;
 }
