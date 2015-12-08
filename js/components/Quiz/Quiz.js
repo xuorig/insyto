@@ -5,6 +5,8 @@ import styles from './Quiz.css';
 import Button from '../Shared/Buttons/Button';
 import Question from '../Question/Question';
 
+import MarkAsDoneMutation from '../../mutations/MarkAsDoneMutation';
+
 class Quiz extends React.Component {
   constructor(props) {
       super(props);
@@ -17,15 +19,32 @@ class Quiz extends React.Component {
   // Tell children through props that the questions have been submitted
   onSubmitAnswers(e) {
     e.preventDefault();
-    this.setState({submitted: true});
-  }
+    let score = 0;
+    for (let i = 0; i < this.props.insyte.quiz.questions.edges.length; i++) {
+      const question_score = this.refs[`question-${i}`].refs.component.getScore();
+      score += question_score
+    }
 
-  // When submitted, the question returns its result (0 or 1)
-  // Add it to the answer scores array
-  onGoodAnswerSelected() {
-    this.setState((previousState, currentProps) => {
-      return {score: previousState.score + 1};
-    });
+    this.setState({
+      submitted: true,
+      score: score,
+    })
+
+    if (score / this.props.insyte.quiz.questions.edges.length > 0.5) {
+      var onSuccess = (response) => {
+        console.log(response);
+      };
+      var onFailure = (transaction) => {
+        var error = transaction.getError() || new Error('Mutation failed.');
+        console.error(error);
+      };
+
+      Relay.Store.update(new MarkAsDoneMutation({
+        insyte_id: this.props.insyte.rails_id
+      }), {onFailure, onSuccess});
+    } else {
+      console.log(score);
+    }
   }
 
   render() {
@@ -46,10 +65,9 @@ class Quiz extends React.Component {
           </div>
           <div className={styles.question_list}>
             {questions.edges.map(
-              question => <Question key={question.node.id}
+              (question, i) => <Question key={question.node.id}
                                     question={question.node}
-                                    submitted={this.state.submitted}
-                                    onGoodAnswerSelected={this.onGoodAnswerSelected.bind(this, 1)}/>
+                                    ref={`question-${i}`}/>
             )}
           </div>
           <div className={styles.quiz__result}>
@@ -60,7 +78,7 @@ class Quiz extends React.Component {
           </div>
         </div>
         <div className={styles.insyte__footer}>
-          <a href="#/insyte/1" className={styles.insyte__footer__back}>Back to insyte</a>
+          <a href={`#/insyte/${this.props.insyte.rails_id}`} className={styles.insyte__footer__back}>Back to insyte</a>
           <a href="#" className={styles.insyte__footer__new}>Show me another insyte</a>
         </div>
       </div>
@@ -72,6 +90,7 @@ export default Relay.createContainer(Quiz, {
   fragments: {
     insyte: () => Relay.QL`
       fragment on Insyte {
+        rails_id
         quiz {
           questions(first: 5) {
             edges {

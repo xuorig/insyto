@@ -8,6 +8,34 @@ import Media from '../Media/Media'
 
 class Insyte extends React.Component {
   render() {
+    let content;
+    if (this.props.insyte.userAllowedToSee) {
+      content = (
+        <div>
+          <div className={styles.insyte__body__content}>
+            <p>{this.props.insyte.description}</p>
+            <Media media={this.props.insyte.media}/>
+          </div>
+          <Button href={`#/insyte/${this.props.insyte.rails_id}/quiz`} text='Answer quiz'/>
+        </div>
+      );
+    } else {
+      let prereqs = this.props.insyte.prereqs.map(
+        (prereq) => <a href={`#/insyte/${prereq.rails_id}`}
+                       className={styles['insyte__heading__title']}>
+                      {prereq.title}
+                    </a>
+      )
+      content = (
+        <div className={styles.insyte__body__content}>
+          <p>It appears you are missing some knowledge to view this Insyte.</p>
+          <p>Check out these prerequisite insytes and come back to this later!</p>
+          <div>
+            {prereqs}
+          </div>
+        </div>
+      )
+    }
     return (
       <div>
         <div className={styles.insyte}>
@@ -16,11 +44,7 @@ class Insyte extends React.Component {
             <div className={styles['insyte__heading__date']}>by {this.props.insyte.user.email}</div>
           </div>
           <div className={styles.insyte__body}>
-            <div className={styles.insyte__body__content}>
-              <p>{this.props.insyte.description}</p>
-              <Media media={this.props.insyte.media}/>
-            </div>
-            <Button href={`#/insyte/${this.props.insyte.rails_id}/quiz`} text='Answer quiz'/>
+            {content}
           </div>
 
         </div>
@@ -45,6 +69,11 @@ export default Relay.createContainer(Insyte, {
           }
           user {
             email
+          }
+          userAllowedToSee
+          prereqs {
+            rails_id
+            title
           }
       }
     `,

@@ -5,6 +5,20 @@ import styles from './Question.css';
 import Answer from '../Answer/Answer';
 
 class Question extends React.Component {
+  getScore() {
+    let score = 0;
+    for (let i = 0; i < this.props.question.answers.edges.length; i++) {
+      let answer_component = this.refs[`answer-${i}`].refs.component;
+      if (`answer-${i}` === this.accepted_ref && answer_component.state.checked) {
+        score = 1;
+        answer_component.showScore(true);
+      } else {
+        answer_component.showScore(false)
+      }
+    }
+    return score;
+  }
+
   render() {
     var question = this.props.question;
     return (
@@ -12,12 +26,15 @@ class Question extends React.Component {
         <div className={styles.question__title}>{question.content}</div>
         <div className={styles.answer_list}>
           {question.answers.edges.map(
-            answer => <Answer key={answer.node.id}
-                              answer={answer.node}
-                              questionId={question.id}
-                              submitted={this.props.submitted}
-                              accepted={this.props.question.accepted_answer.__dataID__ === answer.node.id}
-                              onGoodAnswerSelected={this.props.onGoodAnswerSelected} />
+            (answer, i) => {
+              if (this.props.question.accepted_answer.__dataID__ === answer.node.id) {
+                this.accepted_ref = `answer-${i}`;
+              }
+              return <Answer key={answer.node.id}
+                      ref={`answer-${i}`}
+                      answer={answer.node}
+                      questionId={question.id} />
+            }
           )}
         </div>
       </div>

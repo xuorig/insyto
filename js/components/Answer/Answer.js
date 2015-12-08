@@ -13,14 +13,15 @@ class Answer extends React.Component {
     this._radio = {};
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.submitted && nextProps.submitted) {
-      if (this.state.checked && !nextProps.accepted) {
-        this.setState({answerClass: styles.answer + " " + styles["answer--bad"]});
-      } else if (this.state.checked && nextProps.accepted) {
-        this.setState({answerClass: styles.answer + " " + styles["answer--good"]});
-        nextProps.onGoodAnswerSelected();
-      }
+  showScore(good) {
+    if (!this.state.checked) {
+      return
+    }
+
+    if (good) {
+      this.setState({answerClass: styles.answer + " " + styles["answer--good"]});
+    } else {
+      this.setState({answerClass: styles.answer + " " + styles["answer--bad"]});
     }
   }
 
