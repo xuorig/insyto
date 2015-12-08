@@ -19,7 +19,7 @@ class Answer extends React.Component {
   render() {
     return (
       <div className={'form-field-container'}>
-        <input name="answer[]" type="text" placeholder="Answer Choice" className='insyte-field' ref='choice'/>
+        <input name="answer[]" type="text" placeholder="Answer Choice" className='insyte-field' ref='content'/>
       </div>
     );
   }

@@ -13,14 +13,14 @@ class Insyte extends React.Component {
         <div className={styles.insyte}>
           <div className={styles.insyte__heading}>
             <div className={styles['insyte__heading__title']}>{this.props.insyte.title}</div>
-            <div className={styles['insyte__heading__date']}>September 28th 2015</div>
+            <div className={styles['insyte__heading__date']}>by {this.props.insyte.user.email}</div>
           </div>
           <div className={styles.insyte__body}>
             <div className={styles.insyte__body__content}>
               <p>{this.props.insyte.description}</p>
               <Media media={this.props.insyte.media}/>
             </div>
-            <Button href="#/insyte/1/quiz" text='answer quiz'/>
+            <Button href={`#/insyte/${this.props.insyte.rails_id}/quiz`} text='Answer quiz'/>
           </div>
 
         </div>
@@ -37,10 +37,14 @@ export default Relay.createContainer(Insyte, {
   fragments: {
     insyte: () => Relay.QL`
       fragment on Insyte {
+          rails_id
           title
           description
           media {
             ${Media.getFragment('media')}
+          }
+          user {
+            email
           }
       }
     `,

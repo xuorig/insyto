@@ -10,7 +10,7 @@ class InsyteListItem extends React.Component {
       <div className={styles.insyte}>
         <div className={styles.insyte__heading}>
           <div className={styles['insyte__heading--name']}><a href={`/#/insyte/${this.props.insyte.rails_id}`}>{this.props.insyte.title}</a></div>
-          <div className={styles['insyte__heading--date']}>by Marc-Andre Giroux</div>
+          <div className={styles['insyte__heading--date']}>by {this.props.insyte.user.email}</div>
         </div>
         <div className={styles.insyte__body}>
           <p>{this.props.insyte.description}</p>
@@ -38,6 +38,9 @@ export default Relay.createContainer(InsyteListItem, {
         category {
           rails_id
           name
+        }
+        user {
+          email
         }
       }
     `

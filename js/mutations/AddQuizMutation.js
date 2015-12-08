@@ -7,31 +7,20 @@ export default class AddQuizMutation extends Relay.Mutation {
 
   getVariables() {
     return {
-      title: this.props.title,
-      description: this.props.description,
-      type: this.props.type,
+      insyte_id: this.props.insyte.rails_id,
+      questions: this.props.questions,
     };
   }
 
   getFatQuery() {
     return Relay.QL`
-      fragment on AddInsytePayload {
-        viewer { insytes }
-        newInsyteEdge
+      fragment on AddQuizPayload {
+        insyte_id
       }
     `;
   }
   getConfigs() {
-      return [{
-        type: 'REQUIRED_CHILDREN',
-        // Forces these fragments to be included in the query
-        children: [Relay.QL`
-          fragment on AddInsytePayload {
-            newInsyteEdge {
-              rails_id
-            }
-          }
-        `],
-      }];
+    return [{
+    }];
     }
 }

@@ -15,6 +15,20 @@ class AddQuestion extends React.Component {
       };
   }
 
+  getQuestionData() {
+    let questionData = {};
+    questionData.content = this.refs.content.value;
+    questionData.answers = [];
+    questionData.accepted_answer = this.refs['answer-0'].refs.content.value
+    for (let i = 0; i < this.state.answers.length; i++) {
+     let answer_component = this.refs['answer-' + i];
+     questionData.answers.push({
+       content: answer_component.refs.content.value,
+     });
+   }
+   return questionData;
+  }
+
   onAddAnswer(e) {
     e.preventDefault();
     this.setState((previousState, currentProps) => {
@@ -23,14 +37,14 @@ class AddQuestion extends React.Component {
   }
 
   render() {
-    let answers = this.state.answers.map(question => {
-      return <Answer />;
+    let answers = this.state.answers.map((question, i) => {
+      return <Answer key={i} ref={`answer-${i}`}/>;
     })
     return (
       <div className={styles.question}>
-        <h3>Question 1</h3>
+        <h3>Question {this.props.question.id}</h3>
         <div className={'form-field-container'}>
-          <input name="question[name]" type="text" placeholder="Question content" className='insyte-field' ref='title'/>
+          <input name="question[name]" type="text" placeholder="Question content" className='insyte-field' ref='content'/>
         </div>
         { answers }
         <div className={'form-field-container form-field-container--right-align'}>

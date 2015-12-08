@@ -17,19 +17,25 @@ class AddQuiz extends React.Component {
         message: null,
         loading: false,
         questions: [],
+        current_question_id: 0,
       };
+  }
+
+  getQuestionsData() {
+    let questionsData = []
+    for (var i = 0; i < this.state.current_question_id; i++) {
+     let question_component = this.refs['question-' + i];
+     questionsData.push(question_component.getQuestionData());
+   }
+   return questionsData;
   }
 
   onQuizSubmit(e) {
     e.preventDefault();
-    let title = this.refs.title.value;
-    let description = this.refs.description.value;
 
     var onSuccess = (response) => {
       this.setState({loading: false});
       console.log(response);
-      let insyte_id = response.addInsyte.newInsyteEdge.rails_id;
-      window.location.href = `#/insyte/${insyte_id}`;
     };
     var onFailure = (transaction) => {
       this.setState({loading: false});
@@ -40,14 +46,20 @@ class AddQuiz extends React.Component {
     this.setState({loading: true});
 
     Relay.Store.update(new AddQuizMutation({
-      viewer: this.props.viewer
+      questions: this.getQuestionsData(),
+      insyte: this.props.insyte,
     }), {onFailure, onSuccess});
   }
 
   onAddQuestion(e) {
     e.preventDefault();
     this.setState((previousState, currentProps) => {
-      return {questions: previousState.questions.concat({id: 1})};
+      return {
+        questions: previousState.questions.concat({
+          id: previousState.current_question_id
+        }),
+        current_question_id: previousState.current_question_id + 1,
+      };
     });
   }
 
@@ -55,8 +67,8 @@ class AddQuiz extends React.Component {
     let button = this.state.loading ? <div><Spinner/></div> :
                  <SubmitButton onSubmitFunc={alert}
                                text="Submit Quiz"/>
-    let questions = this.state.questions.map(question => {
-      return <AddQuestion />;
+    let questions = this.state.questions.map((question, i) => {
+      return <AddQuestion key={i} question={question} ref={`question-${i}`}/>;
     });
     return (
       <div>
@@ -65,7 +77,7 @@ class AddQuiz extends React.Component {
           <form>
             { questions }
             <div className={styles['add-new-question']}>
-              <a href="#" className={styles['add-new -question--link']} onClick={this.onAddQuestion.bind(this)}>Add a new question</a>
+              <Button text='Add Question' onClickFunc={this.onAddQuestion.bind(this)}/>
             </div>
             <div className={'form-field-container'}>
               <SubmitButton onSubmitFunc={this.onQuizSubmit.bind(this)}
@@ -80,9 +92,10 @@ class AddQuiz extends React.Component {
 
 export default Relay.createContainer(AddQuiz, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on Viewer {
-        currentUser
+    insyte: () => Relay.QL`
+      fragment on Insyte {
+        rails_id
+        id
       }
     `,
   },

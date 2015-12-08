@@ -29,7 +29,7 @@ class Quiz extends React.Component {
   }
 
   render() {
-    var questions = this.props.quiz.questions;
+    var questions = this.props.insyte.quiz.questions;
     var resultContent;
     if (this.state.submitted) {
       resultContent = <span>{this.state.score} / {questions.edges.length}</span>;
@@ -70,13 +70,15 @@ class Quiz extends React.Component {
 
 export default Relay.createContainer(Quiz, {
   fragments: {
-    quiz: () => Relay.QL`
-      fragment on Quiz {
-        questions(first: 5) {
-          edges {
-            node {
-              id
-              ${Question.getFragment('question')}
+    insyte: () => Relay.QL`
+      fragment on Insyte {
+        quiz {
+          questions(first: 5) {
+            edges {
+              node {
+                id
+                ${Question.getFragment('question')}
+              }
             }
           }
         }

@@ -30,7 +30,7 @@ class AddInsyte extends React.Component {
       this.setState({loading: false});
       console.log(response);
       let insyte_id = response.addInsyte.newInsyteEdge.rails_id;
-      window.location.href = `#/insyte/${insyte_id}`;
+      window.location.href = `#/insyte/${insyte_id}/addquiz`;
     };
     var onFailure = (transaction) => {
       this.setState({loading: false});

@@ -44,7 +44,7 @@ export default (
     />
     <Route
       path="/insyte/:id/addquiz" component={AddQuiz}
-      queries={ViewerQueries}
+      queries={InsyteQueries}
     />
      <Route
       path="/new" component={NewInsyte}
@@ -52,7 +52,7 @@ export default (
     />
     <Route
       path="/insyte/:id/quiz" component={Quiz}
-      queries={QuizQueries}
+      queries={InsyteQueries}
     />
   </Route>
 )
